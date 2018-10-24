@@ -1,0 +1,26 @@
+{
+  "name": "freelancer",
+  "version": "1.0.0",
+  "description": "Pair Project Batch 24 Xavier Fox 2018",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iqbalmaulanaardi/freelancer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/iqbalmaulanaardi/freelancer/issues"
+  },
+  "homepage": "https://github.com/iqbalmaulanaardi/freelancer#readme",
+  "dependencies": {
+    "ejs": "^2.6.1",
+    "express": "^4.16.4",
+    "pg": "^7.5.0",
+    "sequelize": "^4.41.0"
+  }
+}
