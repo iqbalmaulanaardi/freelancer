@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include ../partials/head.ejs%>
+</head>
+
+<body>
+    <div <%- include ../partials/style-wrap.ejs%>>
+        <h1>User Login</h1>
+        <form action="/user/login" method="POST">
+            <div class="form-group">
+                <label for="exampleInputEmail1">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="exampleInputPassword1">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
+            </div>
+            <a class="btn btn-primary " href="/">Back</a>
+            <a href="/owner/login">Login Owner</a>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <%-include ../partials/script.ejs%>
+</body>
+
+</html>
