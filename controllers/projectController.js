@@ -2,9 +2,12 @@ const Models = require('../models/index.js')
 
 class ProjectController {
     static displayData(req, res) {
-        Models.Project.findAll({ order: [
+        Models.Project.findAll({
+                where: { owner_id: req.session.Owners.id },
+                order: [
                     ['id', 'asc']
-                ], })
+                ],
+            })
             .then(function(data) {
                 res.render('displayProject.ejs', { projects: data })
             })
@@ -22,7 +25,8 @@ class ProjectController {
                 title: req.body.title,
                 description: req.body.description,
                 budget: Number(req.body.budget),
-                deadline: new Date(dateStr)
+                deadline: new Date(dateStr),
+                owner_id: req.session.Owners.id
             })
             .then(function() {
                 res.redirect('/projects')
