@@ -2,7 +2,9 @@ const Models = require('../models/index.js')
 
 class ProjectController {
     static displayData(req, res) {
-        Models.Project.findAll()
+        Models.Project.findAll({ order: [
+                    ['id', 'asc']
+                ], })
             .then(function(data) {
                 res.render('displayProject.ejs', { projects: data })
             })
@@ -55,7 +57,7 @@ class ProjectController {
             })
     };
     static deleteProject(req, res) {
-        Models.Project.destroy({ where: { id: req.params.id } })
+        Models.Project.destroy({ where: { id: req.params.id }, individualHooks: true })
             .then(function() {
                 res.redirect('/projects')
             })
