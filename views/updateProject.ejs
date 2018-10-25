@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include ./partials/head.ejs%>
+</head>
+
+<body>
+    <div <%-include ./partials/style-wrap.ejs%>>
+        <form action="/projects/update/<%=project.id%>" method="POST">
+            <!-- title,description,budget,deadline -->
+            <h2>Update Project</h2>
+            <div class="form-group">
+                <label for="title">Project Title</label>
+                <input type="text" class="form-control" id="title" value="<%=project.title%>" name="title" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" value="<%=project.description%>" name="description" required>
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget</label>
+                <input type="number" class="form-control" id="budget" value="<%=project.budget%>" name="budget" required>
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="date" class="form-control" id="deadline" name="deadline" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <%- include ./partials/script.ejs%>
+</body>
+
+</html>

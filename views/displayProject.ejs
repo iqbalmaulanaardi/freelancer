@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include ./partials/head.ejs%>
+</head>
+
+<body>
+    <div <%-include ./partials/style-wrap.ejs%>>
+        <h1>Table Projects</h1>
+        <a class="btn btn-primary " href="/projects/add">Add</a>
+        <table class="table" style="
+        padding: 10px;">
+            <thead>
+                <tr style="text-align:center">
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Action</th>
+
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                <% 
+                let i = 1;
+                projects.forEach(function(project){ %>
+                    <tr>
+                        <th scope="row">
+                            <%=i%>
+                        </th>
+                        <td>
+                            <%=project.name%>
+                        </td>
+                        <td>
+                            <%=project.description%>
+                        </td>
+                        <td>
+                            <%=project.budget%>
+                        </td>
+                        <td>
+                            <%=project.isDate()%>
+                        </td>
+                        <td>
+                            <a href="/projects/update/<%= project.id%>"><button type="button" class="btn btn-outline-warning">Update</button></a>
+                            <a href="/projects/delete/<%= project.id%>"><button type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button></a>
+                        </td>
+
+                    </tr>
+                    <%
+                i++;
+                })%>
+            </tbody>
+        </table>
+    </div>
+    <%- include ./partials/script.ejs%>
+</body>
+
+</html>
