@@ -27,5 +27,19 @@ module.exports = (sequelize, DataTypes) => {
         let str = `${kamus[this.deadline.getDay()]}, ${this.deadline.getDate()}-${this.deadline.getMonth()}-${this.deadline.getFullYear()}`
         return str
     }
+    Project.getHighBudget = function() {
+        return new Promise(function(resolve, reject) {
+            Project.findAll({
+                    where: {
+                        budget: {
+                            [sequelize.Op.gt]: 25000
+                        }
+                    }
+                })
+                .then(function(output) {
+                    resolve(output)
+                })
+        })
+    }
     return Project;
 };

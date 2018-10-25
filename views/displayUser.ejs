@@ -7,49 +7,52 @@
 
 <body>
     <div <%-include ./partials/style-wrap.ejs%>>
-        <h1>Table Projects</h1>
+        <h1>Table Users</h1>
         <a class="btn btn-primary " href="/projects/add">Add</a>
-        <a class="btn btn-primary " href="/user/signout">SignOut</a>
+        <a class="btn btn-primary " href="/owners/signout">SignOut</a>
         <table class="table" style="
         padding: 10px;">
             <thead>
                 <tr style="text-align:center">
                     <th scope="col">No</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Budget</th>
-                    <th scope="col">Deadline</th>
-                    <th scope="col">Detail</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone_number</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Gender</th>
+                    <th scope="col">Status</th>
                     <th scope="col">Action</th>
-
                 </tr>
             </thead>
             <tbody style="text-align:center">
                 <% 
                 let i = 1;
-                projects.forEach(function(project){ %>
+                data.Users.forEach(function(datum){ %>
                     <tr>
                         <th scope="row">
                             <%=i%>
                         </th>
                         <td>
-                            <%=project.title%>
+                            <%=datum.name%>
                         </td>
                         <td>
-                            <%=project.description%>
+                            <%=datum.email%>
                         </td>
                         <td>
-                            <%=project.budget%>
+                            <%=datum.phone_number%>
                         </td>
                         <td>
-                            <%=project.isDate()%>
+                            <%=datum.age%>
                         </td>
                         <td>
-                            <a href="/owners/detail/<%= project.id%>"><button type="button" class="btn btn-outline-warning">Detail</button></a>
+                            <%=datum.gender%>
                         </td>
                         <td>
-                            <a href="/projects/update/<%= project.id%>"><button type="button" class="btn btn-outline-warning">Update</button></a>
-                            <a href="/projects/delete/<%= project.id%>"><button type="button" class="btn btn-outline-danger" onclick="return confirm('Are you sure want to delete?')">Delete</button></a>
+                            <%=datum.ProjectUser.status%>
+                        </td>
+                        <td>
+                            <a href="/owners/hire/<%=projectid%>/<%= datum.id%>"><button type="button" class="btn btn-outline-warning"
+                                    >Accept</button></a>
                         </td>
 
                     </tr>

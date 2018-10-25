@@ -1,8 +1,8 @@
 const express = require('express')
 const app = express()
 const projectController = require('../controllers/projectController.js')
-
-app.get('/projects', projectController.displayData);
+const isOwner = require('../middlewares/isOwner.js')
+app.get('/projects', isOwner, projectController.displayData);
 app.get('/projects/add', projectController.displayAddProjectForm);
 app.post('/projects', projectController.addProject);
 

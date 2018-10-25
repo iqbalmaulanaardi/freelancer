@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include ./partials/head.ejs%>
+</head>
+
+<body>
+    <div <%-include ./partials/style-wrap.ejs%>>
+        <br><br>
+        <a class="btn btn-primary " href="/user/signout">SignOut</a>
+        <a class="btn btn-primary " href="/user/delete" onclick="return confirm('Are you sure want to delete?')">Delete Account</a>
+        <a class="btn btn-primary " href="/user/high" onclick="return confirm('Are you sure want to delete?')">Delete Account</a>
+        <h2>High Budget Project</h2>
+        <br>
+        <table class="projectTable" style="
+        padding: 10px;">
+            <thead>
+                <tr style="text-align:center">
+                    <th scope="col">No</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Deadline</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                <%let k = 1;
+                high.forEach(function(hi){%>
+                    <tr>
+                        <th scope="row">
+                            <%=k%>
+                        </th>
+                        <td>
+                            <%=hi.description%>
+                        </td>
+                        <td>
+                            <%=hi.isDate()%>
+                        </td>
+                    </tr>
+                    <%
+            k++
+            })%>
+            </tbody>
+
+        </table>
+        <h2>Project Available</h2>
+        <br>
+        <table class="projectTable" style="
+        padding: 10px;">
+            <thead>
+                <tr style="text-align:center">
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                <%let i = 1;
+                data.forEach(function(datum){%>
+                    <tr>
+                        <th scope="row">
+                            <%=i%>
+                        </th>
+                        <td>
+                            <%=datum.name%>
+                        </td>
+                        <td>
+                            <%=datum.description%>
+                        </td>
+                        <td>
+                            <%=toRupiah(datum.budget)%>
+                        </td>
+                        <td>
+                            <%=datum.isDate()%>
+                        </td>
+                        <td>
+                            <a href="/user/assign/<%=datum.id%>"><button type="button" class="btn btn-outline-warning">Apply</button>
+                    </td>
+                </tr>
+                <%
+            i++
+            })%>
+            </tbody>
+        </table> 
+        <br><br>
+        <h2> Current Project</h2>
+        <br>
+        <table class="projectTable" style="padding: 10px;" cellspacing="10">
+            <thead>
+                <tr style="text-align:center">
+                    <th scope="col">No</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Budget</th>
+                    <th scope="col">Deadline</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody style="text-align:center">
+                    <%let j = 1;
+                    currents.Projects.forEach(function(current){%>
+                <tr>
+                        <th scope="row">
+                                <%=j%>
+                            </th>
+                            <td>
+                                <%=current.name%>
+                            </td>
+                            <td>
+                                <%=current.description%>
+                            </td>
+                            <td>
+                                <%=toRupiah(current.budget)%>
+                            </td>
+                            <td>
+                                <%=current.isDate()%>
+                            </td>
+                            <td>
+                                <%=current.ProjectUser.status%>
+                            </td>
+                </tr>
+                <%
+                j++
+                })%>
+            </tbody>
+        </table>
+        <br><br><br><br> 
+    </div>
+    <%- include ./partials/script.ejs%>
+</body>
+
+</html>

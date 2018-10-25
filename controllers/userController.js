@@ -1,15 +1,16 @@
 const Models = require('../models/index.js')
 var crypto = require('crypto');
 var session = require('express-session')
+var toRupiah = require('../helpers/toRupiah.js')
 class userController {
     static login(req, res) {
-        res.render('./users/login.ejs', { err: null })
+        res.render('users/login.ejs', { err: null })
     }
     static validasiLogin(req, res) {
         Models.User.findOne({ where: { email: req.body.email } })
             .then(function(output) {
                 if (!output) {
-                    res.render('./user/login.ejs', { err: 'Email not registered' })
+                    res.render('users/login.ejs', { err: 'Email not registered' })
                 } else {
                     let pass = crypto.createHmac('sha256', output.salt).update(req.body.password).digest('hex')
                     if (pass === output.password) {
@@ -18,7 +19,7 @@ class userController {
                             email: output.email
                         }
                         req.session.Users = obj
-                        res.redirect('/projects')
+                        res.redirect('/user/userSession')
                     } else {
                         res.render('./users/login.ejs', { err: 'Incorrect Password' })
                     }
@@ -46,7 +47,7 @@ class userController {
                 salt: salt1
             })
             .then(function() {
-                res.redirect('/projects')
+                res.redirect('/user/login')
             })
             .catch(function(err) {
                 res.send(err.message)
@@ -58,6 +59,67 @@ class userController {
                 res.redirect('/')
             }
         })
+    }
+    static high(req, res) {
+        Models.Project.getHighBudget()
+            .then(function(output) {
+                res.send(output)
+            })
+            .catch(function(err) {
+                res.send(err)
+            })
+    }
+    static userSession(req, res) {
+        // res.send('masuk')
+
+        Models.Project.findAll()
+            .then(function(data) {
+                Models.User.findOne({ include: { model: Models.Project }, where: { id: req.session.Users.id } })
+                    .then(function(output) {
+                        Models.Project.getHighBudget()
+                            .then(function(output1) {
+                                // res.send(output1)
+                                res.locals.toRupiah = toRupiah //helpers
+                                res.render('userSession.ejs', { high: output1, data: data, currents: output })
+                            })
+                            .catch(function(err) {
+                                res.send(err)
+                            })
+                            // res.send(output)
+                    })
+            })
+            .catch(function(err) {
+                res.send(err.message)
+            })
+    }
+    static assign(req, res) {
+        Models.ProjectUser.findOrCreate({
+                where: { user_id: req.session.Users.id, project_id: req.params.projectId },
+                defaults: {
+                    project_id: req.params.projectId,
+                    user_id: req.session.Users.id,
+                    status: 'pending'
+                }
+            })
+            .then(function(data) {
+                res.redirect('/user/userSession')
+            })
+            .catch(function(err) {
+                res.send(err.message)
+            })
+    }
+    static deleteUser(req, res) {
+        Models.User.destroy({ where: { id: req.session.Users.id }, individualHooks: true })
+            .then(function() {
+                req.session.destroy(function(err) {
+                    if (!err) {
+                        res.redirect('/')
+                    }
+                })
+            })
+            .catch(function(err) {
+                res.send(err.message)
+            })
     }
 }
 module.exports = userController

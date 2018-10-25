@@ -3,16 +3,16 @@ var crypto = require('crypto')
 var session = require('express-session')
 class OwnerController {
     static displayData(req, res) {
-        Models.Owner.findAll({
-                order: [
-                    ['id', 'asc']
-                ],
+        Models.Owner.findOne({
+                include: { model: Models.Project },
+                where: { id: req.session.Owners.id }
             })
             .then(function(data) {
-                res.render('displayOwner.ejs', { owners: data })
+                // res.send(data)
+                res.render('displayProject.ejs', { projects: data.Projects, err: null })
             })
             .catch(function(err) {
-                res.send(err)
+                res.render('displayProject.ejs', { err: err.message })
             })
     }
     static displayAddOwnerForm(req, res) {
@@ -33,10 +33,10 @@ class OwnerController {
                 salt: salt1
             })
             .then(function() {
-                res.redirect('/owners')
+                res.render('./owners/login.ejs', { err: null })
             })
             .catch(function(err) {
-                res.send(err)
+                res.send(err.message)
             })
     }
     static displayUpdateOwnerForm(req, res) {
@@ -48,16 +48,10 @@ class OwnerController {
                 res.send(err)
             })
     }
-    static updateOwner(req, res) {
-        Models.Owner.update({
-                name: req.body.name,
-                address: req.body.address,
-                email: req.body.email,
-                phone_number: req.body.phone_number,
-                company: req.body.company
-            }, { where: { id: req.params.id } })
-            .then(function(output) {
-                res.redirect('/owners')
+    static hireUser(req, res) {
+        Models.ProjectUser.update({ status: 'ongoing' }, { where: { user_id: req.params.userid, project_id: req.params.projectid } })
+            .then(function() {
+                res.redirect(`/owners/detail/${req.params.projectid}`)
             })
             .catch(function(err) {
                 res.send(err)
@@ -109,6 +103,17 @@ class OwnerController {
                 res.redirect('/')
             }
         })
+    }
+    static displayDetail(req, res) {
+        Models.Project.findOne({ include: { model: Models.User }, where: { owner_id: req.session.Owners.id, id: req.params.id } })
+            .then(function(data) {
+                // res.send(data)
+                res.render('displayUser.ejs', { projectid: req.params.id, data: data })
+
+            })
+            .catch(function(err) {
+                res.send(err.message)
+            })
     }
 }
 module.exports = OwnerController
