@@ -6,56 +6,59 @@
 </head>
 
 <body>
-    <div <%-include ./partials/style-wrap.ejs%>> <h1>Table Projects</h1>
+    <div <%-include ./partials/style-wrap.ejs%>>
         <h1>Table Owners</h1>
         <a class="btn btn-primary " href="/owners/add">Add</a>
+        <a class="btn btn-primary " href="/owners/signout">SignOut</a>
         <table class="table" style="
         padding: 10px;">
             <thead>
                 <tr style="text-align:center">
+                    <th scope="col">No</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Password</th>
                     <th scope="col">Address</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone_number</th>
                     <th scope="col">Company</th>
-
+                    <th scope="col">Action</th>
+                    <th scope="col">Detail</th>
                 </tr>
             </thead>
             <tbody style="text-align:center">
                 <% 
                 let i = 1;
                 owners.forEach(function(owner){ %>
-                <tr>
-                    <th scope="row">
-                        <%=i%>
-                    </th>
-                    <td>
-                        <%=owner.name%>
-                    </td>
-                    <td>
-                        <%=owner.password%>
-                    </td>
-                    <td>
-                        <%=owner.address%>
-                    </td>
-                    <td>
-                        <%=owner.email%>
-                    </td>
-                    <td>
-                        <%=owner.phone_number%>
-                    </td>
-                    <td>
-                        <%=owner.company%>
-                    </td>
-                    <td>
-                        <a href="/owners/update/<%= owner.id%>"><button type="button" class="btn btn-outline-warning">Update</button></a>
-                        <a href="/owners/delete/<%= owner.id%>"><button type="button" class="btn btn-outline-danger"
+                    <tr>
+                        <th scope="row">
+                            <%=i%>
+                        </th>
+                        <td>
+                            <%=owner.name%>
+                        </td>
+                        <td>
+                            <%=owner.address%>
+                        </td>
+                        <td>
+                            <%=owner.email%>
+                        </td>
+                        <td>
+                            <%=owner.phone_number%>
+                        </td>
+                        <td>
+                            <%=owner.company%>
+                        </td>
+                        <td>
+                            <a href="/owners/update/<%= owner.id%>"><button type="button" class="btn btn-outline-warning">Update</button></a>
+                            <a href="/owners/delete/<%= owner.id%>"><button type="button" class="btn btn-outline-danger"
                                 onclick="return confirm('Are you sure want to delete?')">Delete</button></a>
-                    </td>
+                        </td>
+                        <td>
+                            <a href="/owners/detail/<%= owner.id%>"><button type="button" class="btn btn-outline-warning"
+                            >Detail</button></a>
+                        </td>
 
-                </tr>
-                <%
+                    </tr>
+                    <%
                 i++;
                 })%>
             </tbody>

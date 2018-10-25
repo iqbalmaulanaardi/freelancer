@@ -7,25 +7,31 @@
 
 <body>
     <div <%-include ./partials/style-wrap.ejs%>>
-        <form action="/projects/update/<%=project.id%>" method="POST">
+        <form action="/owners/update/<%=owner.id%>" method="POST">
             <!-- title,description,budget,deadline -->
             <h2>Update Project</h2>
             <div class="form-group">
-                <label for="title">Project Title</label>
-                <input type="text" class="form-control" id="title" value="<%=project.title%>" name="title" required>
+                <label for="title">Name</label>
+                <input type="text" class="form-control" id="title" value="<%=owner.name%>" name="name" required>
             </div>
             <div class="form-group">
-                <label for="description">Description</label>
-                <input type="text" class="form-control" id="description" value="<%=project.description%>" name="description" required>
+                <label for="description">Address</label>
+                <input type="text" class="form-control" id="description" value="<%=owner.address%>" name="address" required>
             </div>
             <div class="form-group">
-                <label for="budget">Budget</label>
-                <input type="number" class="form-control" id="budget" value="<%=project.budget%>" name="budget" required>
+                <label for="title">Email</label>
+                <input type="text" class="form-control" id="title" value="<%=owner.email%>" name="email" required>
             </div>
             <div class="form-group">
-                <label for="deadline">Deadline</label>
-                <input type="date" class="form-control" id="deadline" name="deadline" required>
+                <label for="description">Phone Number</label>
+                <input type="text" class="form-control" id="description" value="<%=owner.phone_number%>" name="phone_number" required>
             </div>
+            <div class="form-group">
+                <label for="title">Company</label>
+                <input type="text" class="form-control" id="title" value="<%=owner.company%>" name="company" required>
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>
