@@ -6,7 +6,17 @@ module.exports = (sequelize, DataTypes) => {
         budget: DataTypes.INTEGER,
         deadline: DataTypes.DATE,
         owner_id: DataTypes.INTEGER
-    }, {});
+    }, {
+        hooks: {
+            beforeDestroy: function(Project, options) {
+                sequelize.models.ProjectUser.destroy({ where: { project_id: Project.id } })
+                    .then(function() {})
+                    .catch(function(err) {
+                        return new err
+                    });
+            }
+        }
+    });
     Project.associate = function(models) {
         // associations can be defined here
         Project.belongsTo(models.Owner, { foreignKey: 'owner_id' });
