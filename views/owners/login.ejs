@@ -7,9 +7,9 @@
 
 <body>
     <div <%- include ../partials/style-wrap.ejs%>>
-        <h1>User Login</h1>
+        <h1>Owner Login</h1>
         <%- include ../partials/validation.ejs %>
-            <form action="/user/login" method="POST">
+            <form action="/owners/login" method="POST">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Email address</label>
                     <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email" required>
@@ -19,7 +19,7 @@
                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" required>
                 </div>
                 <a class="btn btn-primary " href="/">Back</a>
-                <a href="/owners/login">Login Owner</a>
+                <a href="/user/login">Login Owner</a>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
     </div>
