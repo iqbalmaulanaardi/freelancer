@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%-include ./partials/head.ejs%>
+</head>
+
+<body>
+    <div <%-include ./partials/style-wrap.ejs%>>
+        <form action="/projects" method="POST">
+            <!-- title,description,budget,deadline -->
+            <h2>Create Project</h2>
+            <div class="form-group">
+                <label for="title">Project Title</label>
+                <input type="text" class="form-control" id="title" placeholder="Enter Ttile" name="title">
+            </div>
+            <div class="form-group">
+                <label for="description">Description</label>
+                <input type="text" class="form-control" id="description" placeholder="Enter Description" name="description">
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget</label>
+                <input type="number" class="form-control" id="budget" placeholder="Enter Budget(Rupiah)" name="budget">
+            </div>
+            <div class="form-group">
+                <label for="deadline">Deadline</label>
+                <input type="date" class="form-control" id="deadline" name="deadline">
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    <%- include ./partials/script.ejs%>
+</body>
+
+</html>

@@ -9,8 +9,13 @@ module.exports = (sequelize, DataTypes) => {
     }, {});
     Project.associate = function(models) {
         // associations can be defined here
-        Project.belongsTo(models.Owner, { foreignKey: 'project_id' });
+        Project.belongsTo(models.Owner, { foreignKey: 'owner_id' });
         Project.belongsToMany(models.User, { through: models.ProjectUser, foreignKey: 'project_id' });
     };
+    Project.prototype.isDate = function() {
+        let kamus = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+        let str = `${kamus[this.deadline.getDay()]}, ${this.deadline.getDate()}-${this.deadline.getMonth()}-${this.deadline.getFullYear()}`
+        return str
+    }
     return Project;
 };
