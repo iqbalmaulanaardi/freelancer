@@ -1,6 +1,7 @@
 const Models = require('../models/index.js')
 var crypto = require('crypto')
 var session = require('express-session')
+var sendEmail = require('../helpers/sendEmail.js')
 class OwnerController {
     static displayData(req, res) {
         Models.Owner.findOne({
@@ -9,6 +10,7 @@ class OwnerController {
             })
             .then(function(data) {
                 // res.send(data)
+
                 res.render('displayProject.ejs', { projects: data.Projects, err: null })
             })
             .catch(function(err) {
@@ -33,7 +35,13 @@ class OwnerController {
                 salt: salt1
             })
             .then(function() {
-                res.render('./owners/login.ejs', { err: null })
+                sendEmail(req.body.email)
+                    .then(function() {
+                        res.render('./owners/login.ejs', { err: null })
+                    })
+                    .catch(function(err) {
+                        res.send(err)
+                    })
             })
             .catch(function(err) {
                 res.send(err.message)

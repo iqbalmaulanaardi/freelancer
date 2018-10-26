@@ -2,6 +2,8 @@ const Models = require('../models/index.js')
 var crypto = require('crypto');
 var session = require('express-session')
 var toRupiah = require('../helpers/toRupiah.js')
+var sendEmail = require('../helpers/sendEmail.js')
+
 class userController {
     static login(req, res) {
         res.render('users/login.ejs', { err: null })
@@ -47,10 +49,16 @@ class userController {
                 salt: salt1
             })
             .then(function() {
-                res.redirect('/user/login')
+                sendEmail(req.body.email)
+                    .then(function() {
+                        res.redirect('/user/login')
+                    })
+                    .catch(function(err) {
+                        res.render('/user/login', { err: err })
+                    })
             })
             .catch(function(err) {
-                res.send(err.message)
+                res.render('/user/login', { err: err })
             })
     }
     static signout(req, res) {
