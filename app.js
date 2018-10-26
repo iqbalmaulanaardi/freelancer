@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const PORT = 3000
+const port = process.env.PORT || 4000
 app.set('view engine', 'ejs')
 const session = require('express-session')
 const owners = require('./routes/owner.js')
@@ -27,6 +27,6 @@ app.get('/session', function(req, res) {
 app.get('*', function(req, res) {
     res.send('page not found')
 })
-app.listen(PORT, function() {
-    console.log(`listening on port ${PORT}`)
+app.listen(port, function() {
+    console.log(`listening on port ${port}`)
 })
