@@ -1,31 +1,32 @@
 {
-  "name": "freelancer",
-  "version": "1.0.0",
-  "description": "Pair Project Batch 24 Xavier Fox 2018",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/iqbalmaulanaardi/freelancer.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/iqbalmaulanaardi/freelancer/issues"
-  },
-  "homepage": "https://github.com/iqbalmaulanaardi/freelancer#readme",
-  "dependencies": {
-    "crypto-js": "^3.1.9-1",
-    "ejs": "^2.6.1",
-    "express": "^4.16.4",
-    "express-session": "^1.15.6",
-    "node-mandrill": "^1.0.1",
-    "nodemailer": "^4.6.8",
-    "pg": "^7.5.0",
-    "sequelize": "^4.41.0",
-    "session": "^0.1.0"
-  }
+    "name": "freelancer",
+    "version": "1.0.0",
+    "description": "Pair Project Batch 24 Xavier Fox 2018",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/iqbalmaulanaardi/freelancer.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/iqbalmaulanaardi/freelancer/issues"
+    },
+    "homepage": "https://github.com/iqbalmaulanaardi/freelancer#readme",
+    "dependencies": {
+        "crypto-js": "^3.1.9-1",
+        "ejs": "^2.6.1",
+        "express": "^4.16.4",
+        "express-session": "^1.15.6",
+        "node-mandrill": "^1.0.1",
+        "nodemailer": "^4.6.8",
+        "pg": "^7.5.0",
+        "sequelize": "^4.41.0",
+        "session": "^0.1.0"
+    }
 }
