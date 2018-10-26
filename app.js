@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 4000
@@ -11,11 +12,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 app.use(session({
     secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true
-        // cookie: { }
+    // resave: false,
+    // saveUninitialized: true
+    // cookie: { }
 }))
-app.use('/', owners)
+app.use('/owners', owners)
 app.use('/', projects)
 app.use('/', users)
 app.get('/', function(req, res) {

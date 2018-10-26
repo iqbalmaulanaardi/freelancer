@@ -1,23 +1,23 @@
 const express = require('express')
-const app = express()
+const router = express.Router()
 const ownerController = require('../controllers/ownerController.js')
 const isNotLogin = require('../helpers/isNotLogin.js')
 const isOwner = require('../middlewares/isOwner.js')
-app.get('/owners/signup', ownerController.signup)
-app.get('/owners/signout', ownerController.signout)
-app.get('/owners/login', ownerController.login)
-app.post('/owners/login', ownerController.validasiLogin)
+router.get('/signup', ownerController.signup)
+router.get('/signout', ownerController.signout)
+router.get('/login', ownerController.login)
+router.post('/login', ownerController.validasiLogin)
 
-app.get('/owners', isNotLogin, ownerController.displayData);
-app.get('/owners/add', isOwner, ownerController.displayAddOwnerForm);
-app.post('/owners', ownerController.addOwner); //
+router.get('/', isNotLogin, ownerController.displayData);
+router.get('/add', isOwner, ownerController.displayAddOwnerForm);
+router.post('/', ownerController.addOwner); //
 
-app.get('/owners/update/:id', isOwner, ownerController.displayUpdateOwnerForm);
-app.get('/owners/hire/:projectid/:userid', isOwner, ownerController.hireUser);
+router.get('/update/:id', isOwner, ownerController.displayUpdateOwnerForm);
+router.get('/hire/:projectid/:userid', isOwner, ownerController.hireUser);
 
-app.get('/owners/delete/:id', isOwner, ownerController.deleteOwner);
+router.get('/delete/:id', isOwner, ownerController.deleteOwner);
 
-app.get('/owners/detail/:id', isOwner, ownerController.displayDetail)
+router.get('/detail/:id', isOwner, ownerController.displayDetail)
 
 
-module.exports = app
+module.exports = router
